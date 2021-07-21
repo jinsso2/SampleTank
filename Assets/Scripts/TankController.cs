@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class TankController : MonoBehaviour
 {
-    GameObject TankShell;
+    public GameObject TankShell;
+    Rigidbody2D rigid2D;
     bool action = false;
 
     void Start()
     {
         TankShell = transform.Find("TankShell").gameObject;
         TankShell.SetActive(false);
+        rigid2D = GetComponent<Rigidbody2D>();
     }
 
     void Update()
@@ -23,9 +25,18 @@ public class TankController : MonoBehaviour
             {
                 action = true;
             }
+            // ≈ ≈© ¿Ãµø
             if (action)
             {
-                
+                rigid2D.AddForce(new Vector2(30, 0));
+            }
+            else
+            {
+                if(Input.GetMouseButtonUp(0) && action)
+                {
+                        TankShell.SetActive(true);
+                        
+                }
             }
         }
 
